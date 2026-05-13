@@ -410,39 +410,6 @@
       }
     }
 
-    .divider-num {
-      position: absolute;
-      bottom: .75rem;
-      left: .9rem;
-      font-size: 4rem;
-      font-weight: 800;
-      color: rgba(255, 255, 255, .07);
-      z-index: 1;
-      line-height: 1;
-    }
-
-    @media (min-width:576px) {
-      .divider-num {
-        font-size: 5rem;
-        left: 1.75rem;
-      }
-    }
-
-    @media (min-width:768px) {
-      .divider-num {
-        font-size: 6rem;
-        left: 3rem;
-        bottom: 1.5rem;
-      }
-    }
-
-    @media (min-width:992px) {
-      .divider-num {
-        font-size: 8rem;
-        left: 5rem;
-        bottom: 2rem;
-      }
-    }
 
     /* ═══════════════════
    CONTENT (white)
@@ -574,6 +541,76 @@
       font-weight: 600;
     }
 
+    /* ── Workflow steps ── */
+    .workflow-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .65rem;
+      max-height: 72vh;
+      overflow-y: auto;
+      padding-right: .25rem;
+    }
+    @media (min-width:576px) { .workflow-list { gap: .85rem; } }
+    @media (min-width:992px) { .workflow-list { gap: 1.1rem; } }
+
+    .workflow-list li {
+      display: flex;
+      gap: .65rem;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .workflow-list li.visible { opacity: 1; transform: translateX(0); }
+
+    .workflow-thumb {
+      width: 80px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,.12);
+      object-fit: cover;
+      align-self: center;
+    }
+    @media (min-width:576px) { .workflow-thumb { width: 120px; border-radius: 6px; } }
+    @media (min-width:992px) { .workflow-thumb { width: 180px; border-radius: 8px; } }
+
+    .workflow-num {
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--white);
+      background: var(--charcoal);
+      padding: .2rem .45rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+      min-width: 1.9rem;
+      text-align: center;
+      line-height: 1.1;
+    }
+    @media (min-width:576px) { .workflow-num { font-size: 1rem; min-width: 2.1rem; } }
+    @media (min-width:992px) { .workflow-num { font-size: 1.15rem; min-width: 2.4rem; padding: .25rem .55rem; } }
+
+    .workflow-step-title {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: .15rem;
+      line-height: 1.2;
+    }
+    @media (min-width:576px) { .workflow-step-title { font-size: 1rem; } }
+    @media (min-width:992px) { .workflow-step-title { font-size: 1.15rem; } }
+
+    .workflow-step-desc {
+      font-size: .7rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      opacity: .75;
+      line-height: 1.4;
+    }
+    @media (min-width:576px) { .workflow-step-desc { font-size: .8rem; } }
+    @media (min-width:992px) { .workflow-step-desc { font-size: .9rem; } }
+
     /* ── Two-col wonder grid ── */
     .two-col {
       display: grid;
@@ -600,7 +637,6 @@
     .wonder-item {
       background: #f6f6f6;
       padding: .55rem .75rem;
-      border-left: 3px solid var(--charcoal);
       opacity: 0;
       transform: translateY(12px);
       transition: all .35s ease;
@@ -608,7 +644,6 @@
 
     @media (min-width:992px) {
       .wonder-item {
-        border-left-width: 4px;
         padding: 1rem 1.25rem;
       }
     }
@@ -792,8 +827,9 @@
       padding: .75rem;
       line-height: 1.55;
       border-left: 3px solid var(--yellow);
-      max-height: 28vh;
-      overflow: hidden;
+      max-height: 60vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
       opacity: 0;
       transform: translateY(16px);
       transition: all .5s ease .2s;
@@ -902,7 +938,6 @@
       width: 100%;
       max-height: 22vh;
       overflow: hidden;
-      border-left: 3px solid var(--charcoal);
       margin-top: .75rem;
       border-radius: 0 4px 4px 0;
       opacity: 0;
@@ -954,7 +989,6 @@
       position: relative;
       height: 100%;
       width: auto;
-      border-left: 4px solid var(--charcoal);
       overflow: hidden;
       opacity: 0;
       transform: translateX(20px);
@@ -1578,7 +1612,6 @@
     <div class="slide slide-divider">
       <div class="pattern-band-dark"></div>
       <div class="divider-title">Meet Aryan<br>Mehra</div>
-      <div class="divider-num">01</div>
     </div>
 
     <!-- 3 CONTENT — Profile -->
@@ -1618,11 +1651,50 @@
       </div>
     </div>
 
-    <!-- 4 DIVIDER — Workflow -->
-    <div class="slide slide-divider">
-      <div class="pattern-band-dark"></div>
-      <div class="divider-title">The<br>Workflow</div>
-      <div class="divider-num">02</div>
+    <!-- 4 CONTENT — Workflow Steps -->
+    <div class="slide slide-content">
+      <div class="content-title">The <span class="hl">Workflow</span></div>
+      <ul class="workflow-list">
+        <li>
+          <span class="workflow-num">01</span>
+          <img class="workflow-thumb" src="/images/100x/mid-cap-1/flow/step-1.png" alt="Step 1 — Character setup in Magnific">
+          <div>
+            <div class="workflow-step-title">Write JSON Prompt</div>
+            <div class="workflow-step-desc">Structured brief — separate fields for subject, environment, lighting, camera and mood</div>
+          </div>
+        </li>
+        <li>
+          <span class="workflow-num">02</span>
+          <img class="workflow-thumb" src="/images/100x/mid-cap-1/flow/step-2.png" alt="Step 2 — Fixed Seed enable">
+          <div>
+            <div class="workflow-step-title">Enable Fixed Seed 3808</div>
+            <div class="workflow-step-desc">Locks AI starting point — same face, hair and skin tone generated every time</div>
+          </div>
+        </li>
+        <li>
+          <span class="workflow-num">03</span>
+          <img class="workflow-thumb" src="/images/100x/mid-cap-1/flow/step-3.png" alt="Step 3 — @img1 character reference">
+          <div>
+            <div class="workflow-step-title">Set @img1 Character Reference</div>
+            <div class="workflow-step-desc">Upload character sheet at maximum weight — anchors Aryan's face across all scenes</div>
+          </div>
+        </li>
+        <li>
+          <span class="workflow-num">04</span>
+          <img class="workflow-thumb" src="/images/100x/mid-cap-1/flow/step-4.png" alt="Step 4 — Tourist photo reference">
+          <div>
+            <div class="workflow-step-title">Use Real Tourist Reference</div>
+            <div class="workflow-step-desc">Find a real tourist photo per Wonder — use as composition reference for authentic results</div>
+          </div>
+        </li>
+        <li>
+          <span class="workflow-num">05</span>
+          <div>
+            <div class="workflow-step-title">Generate · Review · Accept or Reject</div>
+            <div class="workflow-step-desc">Cinematic model · 2K resolution · Check face consistency · Iterate or accept in workflow slide</div>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <!-- 5 CONTENT — JSON -->
@@ -1651,22 +1723,55 @@
             <div><strong>Organised list vs long sentence</strong> — results always better</div>
           </li>
         </ul>
-        <div class="json-block">
-          <span class="comment">// Plain text — unpredictable</span>
-          "Indian man at Taj Mahal, golden hour"
-
-          <span class="comment">// JSON — full control</span>
-          {
-          <span class="key">"subject"</span>: "@img1 exact face",
-          <span class="key">"environment"</span>: "Taj Mahal",
-          <span class="key">"lighting"</span>: "golden hour",
-          <span class="key">"camera"</span>: {
-          <span class="key">"angle"</span>: "eye-level",
-          <span class="key">"aperture"</span>: "f/2"
-          },
-          <span class="key">"seed"</span>: 3808
-          }
-        </div>
+        <div class="json-block"><span class="comment">// Full JSON brief — Taj Mahal example</span>
+{
+  <span class="key">"prompt"</span>: "@img1 The exact same Indian man from @img1, same face, same sharp facial features, same short black hair, same light stubble, wearing casual white t-shirt and blue jeans and white sneakers, leaning against a metal railing with arms crossed, relaxed casual tourist pose, Taj Mahal massive and close behind him, real metal safety railings in foreground, red sandstone platform, real tourists visible in background walking around, overcast natural daylight sky, no dramatic lighting, handheld phone camera feel, candid tourist moment, ultra realistic, 8k",
+  <span class="key">"subject"</span>: {
+    <span class="key">"reference"</span>: "@img1 MUST use this exact face strictly",
+    <span class="key">"description"</span>: "same Indian man from @img1, 24 years old, sharp facial features, short black hair, light stubble",
+    <span class="key">"outfit"</span>: "casual white t-shirt, blue jeans, white sneakers",
+    <span class="key">"pose"</span>: "leaning against metal railing, arms crossed, slight smile, relaxed tourist"
+  },
+  <span class="key">"environment"</span>: "Taj Mahal Agra India, close up view of main mausoleum, real metal safety railings, red sandstone platform, tourists walking in background, overcast cloudy sky",
+  <span class="key">"style"</span>: "casual tourist photography, handheld phone camera, natural imperfections, no filters",
+  <span class="key">"lighting"</span>: {
+    <span class="key">"type"</span>: "overcast natural daylight",
+    <span class="key">"quality"</span>: "flat soft diffused light, no harsh shadows, no golden hour, just natural cloudy day",
+    <span class="key">"match"</span>: "lighting on subject matches environment perfectly"
+  },
+  <span class="key">"camera"</span>: {
+    <span class="key">"angle"</span>: "eye level, slight upward tilt",
+    <span class="key">"distance"</span>: "medium shot, subject waist up",
+    <span class="key">"depth_of_field"</span>: "phone camera depth, background slightly soft",
+    <span class="key">"focus"</span>: "face and upper body sharp"
+  },
+  <span class="key">"composition"</span>: {
+    <span class="key">"framing"</span>: "slightly off center, casual framing like a friend took it",
+    <span class="key">"subject_placement"</span>: "center slightly left, leaning on railing",
+    <span class="key">"foreground"</span>: "metal railing, red sandstone steps",
+    <span class="key">"background"</span>: "Taj Mahal close and large filling background",
+    <span class="key">"mood"</span>: "casual, authentic, real tourist moment, no drama"
+  },
+  <span class="key">"color_palette"</span>: [
+    "white t-shirt",
+    "blue denim jeans",
+    "white sneakers",
+    "grey overcast sky",
+    "white Taj Mahal",
+    "red sandstone platform"
+  ],
+  <span class="key">"face_consistency"</span>: {
+    <span class="key">"instruction"</span>: "CRITICAL - must use @img1 face exactly",
+    <span class="key">"reference"</span>: "@img1",
+    <span class="key">"features"</span>: "sharp jawline, short black hair, light stubble, Indian man 24 years old",
+    <span class="key">"do_not"</span>: "do not generate a new face, do not change ethnicity, do not change hair"
+  },
+  <span class="key">"technical"</span>: {
+    <span class="key">"render_type"</span>: "phone camera photo, natural, no post processing",
+    <span class="key">"seed"</span>: 3808,
+    <span class="key">"consistency"</span>: "STRICTLY match @img1 face, hair, skin tone"
+  }
+}</div>
       </div>
     </div>
 
@@ -1674,7 +1779,6 @@
     <div class="slide slide-divider">
       <div class="pattern-band-dark"></div>
       <div class="divider-title">Aryan's<br>World Tour</div>
-      <div class="divider-num">03</div>
     </div>
 
     <!-- 9 REJECTED GALLERY -->
@@ -1827,6 +1931,7 @@
       document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === current));
       setTimeout(() => {
         slides[current].querySelectorAll('.bullet-list li').forEach((li, i) => setTimeout(() => li.classList.add('visible'), i * 110));
+        slides[current].querySelectorAll('.workflow-list li').forEach((li, i) => setTimeout(() => li.classList.add('visible'), i * 130));
         slides[current].querySelectorAll('.wonder-item').forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 75));
         slides[current].querySelectorAll('.stat-card').forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 110));
         slides[current].querySelectorAll('.json-block').forEach(el => setTimeout(() => el.classList.add('visible'), 280));
@@ -1844,7 +1949,7 @@
       const prev = current;
       setTimeout(() => slides[prev].classList.remove('exit'), 580);
       slides[current]
-        .querySelectorAll('.bullet-list li,.wonder-item,.stat-card,.json-block,.pin-card,.profile-img-wrap,.profile-img-mobile,.rejected-card')
+        .querySelectorAll('.bullet-list li,.workflow-list li,.wonder-item,.stat-card,.json-block,.pin-card,.profile-img-wrap,.profile-img-mobile,.rejected-card')
         .forEach(el => el.classList.remove('visible'));
       current = index;
       slides[current].classList.add('active');

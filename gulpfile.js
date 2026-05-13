@@ -96,9 +96,13 @@ function fonts() {
 function extras() {
   return src([
     'app/*',
-    '!app/*.html'
+    'app/100x/**/*',
+    '!app/*.html',
+    '!app/profile',
+    '!app/profile/**'
   ], {
-    dot: true
+    dot: true,
+    base: 'app'
   }).pipe(dest('dist'));
 };
 
